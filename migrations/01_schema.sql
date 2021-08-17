@@ -10,8 +10,8 @@ CREATE TABLE properties (
   owner_id INTEGER REFERENCES users(id),
   title VARCHAR(255),
   description TEXT,
-  thumbnail_photo_url TEXT,
-  cover_photo_url TEXT,
+  thumbnail_photo_url VARCHAR(255),
+  cover_photo_url VARCHAR(255),
   cost_per_night INTEGER,
   parking_spaces INTEGER,
   number_of_bathrooms INTEGER,
@@ -37,6 +37,6 @@ CREATE TABLE property_reviews (
   guest_id INTEGER REFERENCES users(id),
   property_id INTEGER REFERENCES properties(id),
   reservation_id INTEGER REFERENCES reservations(id),
-  rating INTEGER,
+  rating SMALLINT,
   message TEXT
 );
