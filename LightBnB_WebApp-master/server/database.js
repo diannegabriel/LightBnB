@@ -137,6 +137,15 @@ const getAllProperties = (options, limit = 10) => {
     }
   }
 
+  if (options.minimum_rating) {
+    queryParams.push(`${options.minimum_rating}`)
+    if (queryParams.length > 1) {
+      queryString += `WHERE property_reviews.rating >= $${queryParams.length}`;
+    } else {
+      queryString += `AND property_reviews.rating >= $${queryParams.length}`;
+    }
+  }
+
   queryParams.push(limit);
   queryString += `
   GROUP BY properties.id
@@ -145,6 +154,7 @@ const getAllProperties = (options, limit = 10) => {
   `;
 
   console.log(queryString, queryParams);
+  console.log(options);
 
   return pool.query(queryString, queryParams).then((res) => res.rows);
 };
