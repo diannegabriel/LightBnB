@@ -154,8 +154,8 @@ const getAllProperties = (options, limit = 10) => {
   LIMIT $${queryParams.length};
   `;
 
-  console.log(queryString, queryParams);
-  console.log(options);
+  // console.log(queryString, queryParams);
+  // console.log(options);
 
   return pool.query(queryString, queryParams).then((res) => res.rows);
 };
@@ -172,7 +172,7 @@ const addProperty = function(property) {
   // property.id = propertyId;
   // properties[propertyId] = property;
   // return Promise.resolve(property);
-  console.log(property);
+  // console.log(property);
 
   return pool
     .query(`INSERT INTO properties 
@@ -180,7 +180,8 @@ const addProperty = function(property) {
     thumbnail_photo_url, cover_photo_url, 
     cost_per_night, street, city, province, post_code, country, parking_spaces, 
     number_of_bathrooms, number_of_bedrooms) 
-    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING *`,
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) 
+    RETURNING *`,
     [property.owner_id, property.title, property.description, 
     property.thumbnail_photo_url, property.cover_photo_url, 
     property.cost_per_night, property.street, property.city, property.province, property.post_code, property.country, property.parking_spaces, 
